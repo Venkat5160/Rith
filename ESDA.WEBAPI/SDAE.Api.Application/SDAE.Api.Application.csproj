@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.1.17" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SDAE.Common\SDAE.Common.csproj" />
+    <ProjectReference Include="..\SDAE.Data.Model\SDAE.Data.Model.csproj" />
+    <ProjectReference Include="..\SDAE.Data\SDAE.Data.csproj" />
+  </ItemGroup>
+
+</Project>

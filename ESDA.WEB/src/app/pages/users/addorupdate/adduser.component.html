@@ -1,0 +1,167 @@
+<div class="intro-y flex flex-col sm:flex-row items-center mt-2">
+  <form [formGroup]="addUserForm" (ngSubmit)="saveDetails()">
+    <div class="p-5 grid grid-cols-6 gap-4 row-gap-3">
+      <div class="col-span-12 sm:col-span-12">
+        <div style="width: 49%; float: left;">
+          <div class="col-span-12 sm:col-span-12">
+            <label>First Name</label>
+            <input type="text" formControlName="FirstName" class="input w-full border mt-2 flex-1"
+              placeholder="FirstName" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+            <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+              <div *ngIf="f.FirstName.errors.required"> First Name is required</div>
+            </div>
+          </div>
+          <div class="col-span-12 sm:col-span-12">
+            <label>Last Name</label>
+            <input type="text" formControlName="LastName" class="input w-full border mt-2 flex-1" placeholder="LastName"
+              [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+            <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+              <div *ngIf="f.LastName.errors.required"> Last Name is required</div>
+            </div>
+          </div>
+
+          <div class="col-span-12 sm:col-span-12">
+            <label>Phone</label>
+            <input type="text" formControlName="Phone" class="input w-full border mt-2 flex-1" placeholder="Phone" />
+
+
+          </div>
+        </div>
+        <div style="width: 49%; float: right;">
+          <div class="col-span-12 sm:col-span-12">
+            <label>Email(User Name)</label>
+            <input [readonly]="isUpdateMode" type="text" formControlName="Email" class="input w-full border mt-2 flex-1"
+              placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+            <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+              <div *ngIf="f.Email.errors.required"> Email is required</div>
+              <div *ngIf="f.Email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <!-- <div class="col-span-12 sm:col-span-12">
+            <label>Role</label>
+            <select formControlName="RoleId" class="input w-full border mt-2 flex-1">
+              <option value="">Choose Role</option> -->
+          <!-- <option *ngFor=" let role of RoleList">{{role}}</option> -->
+          <!-- <option value="17fadad0-1b85-448e-b58b-3d97c4611111">Admin</option>
+              <option value="17fadad0-1b85-448e-b58b-3d97c4622222">Executive</option>
+            </select>
+            <div *ngIf="submitted && f.RoleId.errors" class="invalid-feedback">
+              <div *ngIf="f.RoleId.errors.required"> Select Role </div>
+            </div>
+          </div> -->
+
+          <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+            <div class="col-span-6">
+              <label>Role</label>
+              <select class="input w-full border mt-2 flex-1" formControlName="RoleId"
+                [ngClass]="{ 'is-invalid': submitted && f.RoleId.errors }">
+                <option value="" selected>Choose Role</option>
+                <option *ngFor="let role of lstRoles" [value]="role.id">{{role.name}}</option>
+                <!-- <option value="17fadad0-1b85-448e-b58b-3d97c4611111">Admin</option>
+                    <option value="17fadad0-1b85-448e-b58b-3d97c4622222">Executive</option> -->
+              </select>
+              <div *ngIf="submitted && f.RoleId.errors" class="invalid-feedback">
+                <div *ngIf="f.RoleId.errors.required">Role is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!isUpdateMode" class="col-span-12 sm:col-span-12">
+            <label>Password</label>
+            <input type="password" formControlName="Password" class="input w-full border mt-2 flex-1"
+              placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }" />
+            <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+              <div *ngIf="f.Password.errors.required"> Password is required</div>
+              <!-- </div>
+            <div *ngIf="submitted && f.Password.errors" class="invalid-feedback"> -->
+              <div *ngIf="f.Password.errors.pattern">
+                Password must follow the below guidelines<br>
+                It should be of minimum 6 characters in length. <br>
+                At least one Capital.<br>
+                At least one Digit. <br>
+                At least one special character.<br>
+                Example: John123$
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!isUpdateMode" class="col-span-12 sm:col-span-12">
+            <label>Confirm Password</label>
+            <input type="password" formControlName="ConfirmPassword" class="input w-full border mt-2 flex-1"
+              placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submitted && f.ConfirmPassword.errors }" />
+            <div *ngIf="submitted && f.ConfirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.ConfirmPassword.errors.required"> Confirm Password is required</div>
+            </div>
+            <div *ngIf="submitted && f.ConfirmPassword.errors.mustMatch" class="invalid-feedback">
+              <div> Password and Confirm not matched</div>
+            </div>
+          </div>
+          <div *ngIf="isUpdateMode" class="col-span-12 sm:col-span-12" style="margin-top: 39px;">
+            <!-- <label>Update Password</label> -->
+            <!-- <a class="underlineHover forgotPwd">Update Password</a> -->
+            <button (click)="UpdatePwdModel(content)" type="button" class="button border text-gray-700 mr-1">Update
+              Password</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-13">
+        <br>
+        <button (click)="backtoListScreen()" type="button" class="button w-20 border text-gray-700 mr-1">Cancel</button>
+        &nbsp;
+        <button type="submit" class="button w-20 bg-theme-1 text-white">{{isUpdateMode?"Update":"Save"}}</button>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<!-- Update password in Modal Popup -->
+
+<ng-template #content let-modal>
+  <form [formGroup]="createNewPwdForm" (ngSubmit)="updatePassword()">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update Password</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="col-span-12 sm:col-span-12">
+        <label>Password</label>
+        <input type="password" formControlName="NewPassword" class="input w-full border mt-2 flex-1"
+          placeholder="Password" [ngClass]="{ 'is-invalid': submitted && g.NewPassword.errors }" />
+        <div *ngIf="submitted && g.NewPassword.errors" class="invalid-feedback">
+          <div *ngIf="g.NewPassword.errors.required"> Password is required</div>
+        </div>
+        <div *ngIf="submitted && g.NewPassword.errors" class="invalid-feedback">
+          <div *ngIf="g.NewPassword.errors.pattern">
+            Password must follow the below guidelines<br>
+            It should be of minimum 6 characters in length. <br>
+            At least one Capital.<br>
+            At least one Digit. <br>
+            At least one Special Character.<br>
+            Example: John123$
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-12">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="ConfirmPassword" class="input w-full border mt-2 flex-1"
+          placeholder="Confirm Password" [ngClass]="{ 'is-invalid': submitted && g.ConfirmPassword.errors }" />
+        <div *ngIf="submitted && g.ConfirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="g.ConfirmPassword.errors.required"> Confirm Password is required</div>
+        </div>
+        <div *ngIf="submitted && g.ConfirmPassword.errors.mustMatch" class="invalid-feedback">
+          <div> Password and Confirm not matched </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a (click)="modal.dismiss('Cross click')" class="btn btn-default btn-sm text-right">Cancel</a>
+      <button type="submit" class="button button--lg w-full xl:w-32 text-white bg-theme-9 xl:mr-3">
+        Update
+      </button>
+    </div>
+  </form>
+</ng-template>
+<!--End update password in Modal Popup -->

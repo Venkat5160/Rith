@@ -1,0 +1,164 @@
+<div class="login">
+  <div class="container">
+    <div class="block xl:grid grid-cols-2 gap-4">
+      <!-- BEGIN: Login Info -->
+      <div class="hidden xl:flex flex-col min-h-screen">
+        <a href="" class="-intro-x flex items-center" style="width: 279px; height: 100px;">
+          <!-- <img alt="logo" src="assets/images/ESDA-green.png" style="height: 125px; width: 150px;" /> -->
+        </a>
+      </div>
+      <!-- END: Login Info -->
+      <!-- BEGIN: Login Form -->
+      <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
+
+        <div
+          class="my-auto mx-auto xl:ml-20 bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+          <!-- <div class="hidden xl:flex flex-col min-h-screen"> -->
+          <a href="" class="-intro-x flex items-center">
+            <img alt="logo" src="assets/images/ESDA-green-2.png" style="padding-left: 100px; padding-bottom: 26px;" />
+          </a>
+          <!-- </div> -->
+
+          <form [formGroup]="loginForm">
+            <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left" style="padding-right: 5px;">
+              Sign in
+            </h2>
+            <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">
+              A few more clicks to sign in to your account. Manage all your
+              e-commerce accounts in one place
+            </div>
+            <div class="intro-x mt-8">
+              <input type="text" formControlName="userName"
+                class="intro-x login__input input input--lg border border-gray-300 block" placeholder="Email" />
+              <input type="password" formControlName="password"
+                class="intro-x login__input input input--lg border border-gray-300 block mt-4" placeholder="Password" />
+            </div>
+            <div class="intro-x flex text-gray-700 text-xs sm:text-sm mt-4">
+              <div class="flex items-center mr-auto">
+                <input type="checkbox" formControlName="rememberMe" class="input border mr-2" id="remember-me" />
+                <label class="cursor-pointer select-none label" for="remember-me">Remember me</label>
+              </div>
+              <!-- <a class="underlineHover forgotPwd">Forgot Password?</a> -->
+              <!-- <a href="">Forgot Password?</a> -->
+              <a class="underlineHover forgotPwd" (click)="openAddModal(content)">Forgot Password?</a>
+              <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button> -->
+            </div>
+            <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
+              <a (click)="login()"><button class="button button--lg w-full xl:w-32 text-white bg-theme-9 xl:mr-3">
+                  Login
+                </button></a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- END: Login Form -->
+    </div>
+  </div>
+</div>
+
+<!-- Update password in Modal Popup -->
+
+<ng-template #content let-modal let-c="close" let-d="dismiss">
+  <!-- <form [formGroup]="forgotPasswordForm" (ngSubmit)="onPwdUpdateSubmit()"> -->
+  <div>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- <div style="padding-left: 129px" class="intro-x mt-12">formControlName="userName" -->
+      <input type="text" [(ngModel)]="userName"
+        class="intro-x login__input input input--lg border border-gray-300 block" placeholder="Email" />
+      <!-- </div> -->
+    </div>
+    <div class="modal-footer">
+      <a (click)="modal.dismiss('Cross click')" class="btn btn-default btn-sm text-right">Cancel</a>
+      <button (click)="onSendOtp(validateOTP)" type="Send OTP"
+        class="button button--lg w-full xl:w-32 text-white bg-theme-9 xl:mr-3"> Send OTP
+      </button>
+    </div>
+  </div>
+  <!-- </form> -->
+</ng-template>
+<!--End update password in Modal Popup -->
+
+
+<ng-template #validateOTP let-modal>
+  <!-- <form [formGroup]="forgotPasswordForm" (ngSubmit)="onPwdUpdateSubmit()"> -->
+  <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Validate OTP</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- <div style="padding-left: 129px" class="intro-x mt-12">formControlName="userName" -->
+      <input type="text" [(ngModel)]="otp" class="intro-x login__input input input--lg border border-gray-300 block"
+        placeholder="OTP" />
+      <!-- </div> -->
+    </div>
+
+    <div class="modal-footer">
+      <a (click)="modal.dismiss('Cross click')" class="btn btn-default btn-sm text-right">Cancel</a>
+      <button (click)="onValidateOtp(updatePwd)" class="button button--lg w-full xl:w-32 text-white bg-theme-9 xl:mr-3">
+        Validate
+      </button>
+    </div>
+  </div>
+  <!-- </form> -->
+</ng-template>d
+
+<ng-template #updatePwd let-modal>
+  <form [formGroup]="updatePwdForm" (ngSubmit)="onPwdUpdateSubmit()">
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update Password</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="col-span-12 sm:col-span-12">
+        <label>Password</label>
+        <input type="password" formControlName="password" class="input w-full border mt-2 flex-1" placeholder="Password"
+          [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors }" />
+        <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required"> Password is required</div>
+        </div>
+        <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.pattern">
+            Password must follow the below guidelines<br>
+            It should be of minimum 6 characters in length. <br>
+            At least one Capital.<br>
+            At least one digit. <br>
+            At least one special character.<br>
+            Example: John123$
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-12">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="confompassword" class="input w-full border mt-2 flex-1"
+          placeholder="Confirm Password" [ngClass]="{ 'is-invalid': isSubmitted && f.confompassword.errors }" />
+        <div *ngIf="isSubmitted && f.confompassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confompassword.errors.required"> Confirm Password is required</div>
+        </div>
+        <div *ngIf="isSubmitted && f.confompassword.errors.mustMatch" class="invalid-feedback">
+          <div> Password and Confirm not matched mustMatch</div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+
+    <div class="modal-footer">
+      <a (click)="modal.dismiss('Cross click')" class="btn btn-default btn-sm text-right">Cancel</a>
+      <button type="submit" class="button button--lg w-full xl:w-32 text-white bg-theme-9 xl:mr-3">
+        Send
+      </button>
+    </div>
+  </form>
+</ng-template>

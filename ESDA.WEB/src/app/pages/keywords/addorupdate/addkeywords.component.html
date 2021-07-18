@@ -1,0 +1,20 @@
+<div class="intro-y flex flex-col sm:flex-row items-center mt-2">       
+    <form [formGroup]="addKeywordForm" (ngSubmit)="saveDetails()">     
+      <div class="p-5 grid grid-cols-6 gap-4 row-gap-3">
+        <div class="col-span-12 sm:col-span-12">
+          <label>Keyword</label>
+          <input type="text"  formControlName="Keyword" class="input w-full border mt-2 flex-1" placeholder="Keyword" [ngClass]="{ 'is-invalid': submitted && f.Keyword.errors }"/>
+          <div *ngIf="submitted && f.Keyword.errors" class="invalid-feedback">
+            <div *ngIf="f.Keyword.errors.required"> Keyword is required</div>
+        </div>  
+      </div>
+      <div class="col-span-12 sm:col-span-13">
+        <button (click)="backtoListScreen()" type="button" class="button w-20 border text-gray-700 mr-1">Cancel</button> &nbsp;
+        <button type="submit" class="button w-20 bg-theme-1 text-white">Save</button>  
+      </div>
+    </div>
+    </form>  
+ 
+</div>
+
+

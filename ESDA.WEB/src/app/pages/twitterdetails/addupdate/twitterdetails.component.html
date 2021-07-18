@@ -1,0 +1,68 @@
+<div class="intro-y flex flex-col sm:flex-row items-center mt-2">
+  <h2 class="text-lg font-medium mr-auto">Twitter </h2>
+  <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
+    <button  *ngIf="!isEditMode" (click)="updateEditMode(true)"  class="button w-32 mr-1 mb-2 bg-theme-9 text-white">Edit</button>
+    <button  *ngIf="isEditMode" (click)="saveDetails()"   class="button w-24 mr-1 mb-2 bg-theme-9 text-white">Save</button>
+    <button *ngIf="isEditMode" (click)="updateEditMode(false)" class="button w-24 mr-1 mb-2 bg-theme-6 text-white">Cancel</button>
+  </div>
+</div>
+<div class="col-span-12 mt-2">
+  <form [formGroup]="TwitterDetailsForm" (ngSubmit)="saveDetails()">
+    <div class="grid grid-cols-12 gap-6 mt-5"> 
+      <!-- BEGIN: Datatable -->
+      <div class="intro-y col-span-12 lg:col-span-6"> 
+        <!-- BEGIN: Vertical Form -->
+        <div class="intro-y box">
+          <div class="p-5" id="vertical-form">
+            <div class="preview">
+              <div> 
+                <input type="text" [readonly]="!isEditMode"  formControlName="Username" class="input w-full border mt-2 flex-1" placeholder="User Name" [ngClass]="{ 'is-invalid': submitted && f.Username.errors }"/>
+                <div *ngIf="submitted && f.Username.errors" class="invalid-feedback">
+                  <div *ngIf="f.Username.errors.required"> Username is required</div>
+              </div> 
+              </div>
+              <div class="mt-3"> 
+                <input type="text" [readonly]="!isEditMode"  formControlName="Url" class="input w-full border mt-2 flex-1" placeholder="Url" [ngClass]="{ 'is-invalid': submitted && f.Url.errors }"/>
+                <div *ngIf="submitted && f.Url.errors" class="invalid-feedback">
+                  <div *ngIf="f.Url.errors.required"> Url is required</div>
+              </div> 
+              </div>
+              <div class="mt-3"> 
+                <input type="text" [readonly]="!isEditMode"  formControlName="SecretKey" class="input w-full border mt-2 flex-1" placeholder="Secret Key" [ngClass]="{ 'is-invalid': submitted && f.SecretKey.errors }"/>
+                <div *ngIf="submitted && f.SecretKey.errors" class="invalid-feedback">
+                  <div *ngIf="f.SecretKey.errors.required"> SecretKey is required</div>
+              </div> 
+              </div>  
+            </div>
+          </div>
+        </div>
+        <!-- END: Vertical Form --> 
+      </div>
+      <div class="intro-y col-span-12 lg:col-span-6"> 
+        <!-- BEGIN: Vertical Form -->
+        <div class="intro-y box">
+          <div class="p-5" id="vertical-form">
+            <div class="preview">   
+              <div class="mt-3"> 
+                <input type="password" [readonly]="!isEditMode"  formControlName="Password" class="input w-full border mt-2 flex-1" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }"/>
+                <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                  <div *ngIf="f.Password.errors.required"> Password is required</div>
+              </div>
+              </div>
+              <div class="mt-3"> 
+                <input type="text" [readonly]="!isEditMode" formControlName="ClientId" class="input w-full border mt-2 flex-1" placeholder="Client ID" [ngClass]="{ 'is-invalid': submitted && f.ClientId.errors }"/>
+                <div *ngIf="submitted && f.ClientId.errors" class="invalid-feedback">
+                  <div *ngIf="f.ClientId.errors.required"> ClientId is required</div>
+              </div>
+              </div>
+         
+            </div>
+          </div>
+        </div>
+        <!-- END: Vertical Form --> 
+      </div>
+      <!-- END: Datatable --> 
+    </div>
+  </form>
+</div>
+

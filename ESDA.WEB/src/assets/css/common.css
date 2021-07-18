@@ -1,0 +1,10 @@
+
+.dataTables_length, .dataTables_filter, .dataTables_info {
+    display: none !important;
+}
+.datatable-wrapper .table-border-top {
+    border-top: none !important;
+}
+.mt--15 {
+    margin-top: -15px !important;
+}

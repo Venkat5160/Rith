@@ -1,0 +1,14 @@
+<!-- <iframe width="100%" height="100%"
+    src="https://app.powerbi.com/view?r=eyJrIjoiZDYxYmQ3M2QtYmI3NC00YTdkLTg0ZTAtMGI2YjM5MzhjZjQwIiwidCI6ImRkNjUxYmFkLThkNmUtNDE2YS1iMWM2LTY2MzNhZTEyOTFmMCJ9&pageName=ReportSection1cc34b20050b2902ac1a"
+    frameborder="0" allowFullScreen="true" frameborder="0"></iframe> -->
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-2" style="padding-left: 15px;">
+    <h2 class="text-lg font-medium mr-auto">Dashboard</h2>
+    <div class="flex items-center sm:ml-auto mt-3 sm:mt-0" style="padding-right: 10px;">
+        <button (click)="print()" class="button w-32 mr-1 mb-2 bg-theme-9 text-white">Print</button>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-bottom: 10px;">
+    <div class="reportContainer iframeContainer active" style="height: 600px; width:100%" id="reportContainer"></div>
+</div>
